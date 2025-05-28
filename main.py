@@ -1,9 +1,8 @@
-import Route
-
+from Route import Route
 
 while True:
     
-    userInput = input("Please enter either 1, 2 or 3 for file input or STOP to end program")
+    userInput = input("Please enter either 1, 2 or 3 for file input or STOP to end program: ")
     userInput.lower()
 
     match userInput:

@@ -1,18 +1,20 @@
 class Route:
     def __init__(self, file):
         self.file = f"Route00{file}.txt"
-        self.movement
-        self.path
+        self.path = []
+        self.movement = []
 
-        print(self.file)
-        self.openFile 
+        self.openFile()
 
     def openFile(self):
         with open(self.file) as file:
             self.movement = [line.strip() for line in file]
 
-        if self.plotRoute() == "Error":
+        if (self.plotRoute() == False):
             print("Error: Route out of bounds")
+            return
+        
+        self.printOut()
 
     def plotRoute(self):
         self.path = [self.movement[0]-1,self.movement[1]-1]
@@ -21,24 +23,24 @@ class Route:
                 if self.validate(self.path[-1][0]+1):
                     self.path.append([self.path[-1][0]+1,self.path[-1][1]])
                     continue
-                return "Error"
+                return False
             elif self.movement[i] == 'S':
                 if self.validate(self.path[-1][0]+1):
                     self.path.append([self.path[-1][0]-1,self.path[-1][1]])
                     continue
-                return "Error"
+                return False
             elif self.movement[i] == 'E':
                 if self.validate(self.path[-1][0]+1):
                     self.path.append([self.path[-1][0],self.path[-1][1]+1])
                     continue
-                return "Error"
+                return False
             else:
                 if self.validate(self.path[-1][0]+1):
                     self.path.append([self.path[-1][0]+1,self.path[-1][1]-1])
                     continue
-                return "Error"
+                return False
             
-        return "Success"
+        return True
     
     def validate(param):
         if 0<=param & param >=12:
